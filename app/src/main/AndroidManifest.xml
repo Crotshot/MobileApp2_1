@@ -11,16 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobApp2_1">
         <activity
-            android:name=".activities.Messages"
-            android:exported="false" />
-        <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.Messages"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:exported="true">
         </activity>
     </application>
 

@@ -10,7 +10,6 @@ import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.ActivityMainBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
 import wit.assignments.mobapp2_1.models.MarkModel
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     lateinit var app: MicaAppMain
