@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class MarkModel (var id: Long = 0,
                       val messageText : String = ". . .",
-                      val userName : String = "") : Parcelable/*,
-                      val posRatings : Int = 0,
-                      val negRatings : Int = 0) : Parcelable*/
+                      val userName : String = "",
+                      val views : Int = 0,
+                      val goodRatings : Int = 0,
+                      val poorRatings : Int = 0) : Parcelable

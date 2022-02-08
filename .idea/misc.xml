@@ -4,7 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/MobileApp2_1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2725" />
-        <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_messages.xml" value="0.36666666666666664" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/layout/card_mark.xml" value="0.33" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/menu/menu_messages.xml" value="0.25" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2725" />
       </map>
     </option>
   </component>

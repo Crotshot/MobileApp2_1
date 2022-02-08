@@ -5,36 +5,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import wit.assignments.mobapp2_1.R
-import wit.assignments.mobapp2_1.databinding.ActivityMainBinding
+import wit.assignments.mobapp2_1.adapters.MarkAdapter
+import wit.assignments.mobapp2_1.databinding.ActivityMessagesBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
-import wit.assignments.mobapp2_1.models.MarkModel
-import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class Messages : AppCompatActivity() {
+
     lateinit var app: MicaAppMain
-    private lateinit var mainLayout : ActivityMainBinding
-    var buttonPresses = 0
+    lateinit var messagesLayout : ActivityMessagesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        messagesLayout = ActivityMessagesBinding.inflate(layoutInflater)
+        setContentView(messagesLayout.root)
 
         app = this.application as MicaAppMain
-
-        mainLayout = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainLayout.root)
-
-        mainLayout.testButton.setOnClickListener {
-            buttonPresses++
-            Toast.makeText(applicationContext,"Button has been pressed $buttonPresses times!",Toast.LENGTH_SHORT).show()
-            app.markStore.create(MarkModel(messageText = "Press $buttonPresses", userName = "Bob", views = 342432, goodRatings = 342, poorRatings = 1))
-        }
+        messagesLayout.recyclerView.layoutManager = LinearLayoutManager(this)
+        messagesLayout.recyclerView.adapter = MarkAdapter(app.markStore.findAll())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_messages, menu)
         return true
     }
 
@@ -43,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_messages -> { startActivity(Intent(this, Messages::class.java))
+            R.id.action_main -> { startActivity(Intent(this, MainActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
