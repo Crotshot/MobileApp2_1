@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_messages"
+        android:id="@+id/messagesFragment"
         android:orderInCategory="100"
         android:title="@string/action_messages"
         app:showAsAction="never" />
