@@ -12,5 +12,10 @@
     <string name="action_post">Post</string>
     <string name="action_message">Message</string>
     <string name="add_mark">Add Mark</string>
+    <string name="group_communicate">T E S T</string>
 
+
+    <string name="nav_header_title">M I C A</string>
+    <string name="nav_header_subtitle">Leave your mark</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

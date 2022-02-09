@@ -43,10 +43,12 @@
             android:layout_height="wrap_content"
             android:text="Post"
             android:textColor="@color/color_accent_light"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/post_anon_button"
-            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintHorizontal_bias="0.314"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="622dp" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintVertical_bias="0.197" />
 
         <Button
             android:id="@+id/post_anon_button"
