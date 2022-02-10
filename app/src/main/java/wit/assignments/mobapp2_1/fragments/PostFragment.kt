@@ -85,7 +85,7 @@ class PostFragment : Fragment() {
         app.markStore.create(
             MarkModel(
                 messageText = markText,
-                userName = username,
+                userName = username
             )
         )
     }

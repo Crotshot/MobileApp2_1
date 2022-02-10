@@ -53,6 +53,13 @@ class MapFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
 
+            val manager : FragmentManager = requireFragmentManager()
+            val fragment = PostFragment()
+            val transaction = manager.beginTransaction()
+            transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+            transaction.replace(R.id.nav_host_fragment, fragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
 //            app.markStore.create(
 //                MarkModel(
 //                    messageText = "Press $buttonPresses",
