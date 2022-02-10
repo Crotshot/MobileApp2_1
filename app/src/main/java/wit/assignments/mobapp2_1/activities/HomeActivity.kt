@@ -1,15 +1,18 @@
 package wit.assignments.mobapp2_1.activities
 
+import android.app.Fragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.ActivityHomeBinding
 
-class HomeActivity : AppCompatActivity() {
+
+class HomeActivity : AppCompatActivity(){
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var activityHomeBinding : ActivityHomeBinding
@@ -33,4 +36,5 @@ class HomeActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
     }
+
 }

@@ -2,12 +2,15 @@ package wit.assignments.mobapp2_1.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
+import wit.assignments.mobapp2_1.databinding.FragmentMapBinding
 import wit.assignments.mobapp2_1.databinding.FragmentPostBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
+import wit.assignments.mobapp2_1.models.MarkModel
 
 class PostFragment : Fragment() {
 
@@ -29,6 +32,8 @@ class PostFragment : Fragment() {
         val root = fragBinding.root
         activity?.title = getString(R.string.action_post)
 
+        setButtonListeners(fragBinding)
+
         return root
     }
 
@@ -38,6 +43,51 @@ class PostFragment : Fragment() {
             PostFragment().apply {
                 arguments = Bundle().apply { }
             }
+    }
+
+
+    fun setButtonListeners(layout: FragmentPostBinding) {
+        layout.imageButton.setOnClickListener {
+            Toast.makeText(
+                context, "Taking Picture",
+                Toast.LENGTH_SHORT
+            ).show()
+            //TODO -> Assignment 2 add image
+        }
+        layout.postButton.setOnClickListener {
+            post(false, layout)
+        }
+        layout.postAnonButton.setOnClickListener {
+            post(true, layout)
+        }
+    }
+
+    fun post(anon : Boolean,layout: FragmentPostBinding){
+        val markText : String = layout.postText.text.toString()
+        val username : String = if(anon)
+            "Anonymous"
+        else
+            "Bob" //TODO -> Assingment 2 get username
+
+        if(markText.isEmpty()) {//TODO-> Assingment 2 add sensoring of poor language
+            Toast.makeText(
+                context, "Mark text empty, please enter some text",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        Toast.makeText(
+            context, "Posting as $username",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        app.markStore.create(
+            MarkModel(
+                messageText = markText,
+                userName = username,
+            )
+        )
     }
 
     override fun onDestroyView() {

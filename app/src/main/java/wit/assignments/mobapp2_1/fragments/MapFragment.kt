@@ -2,23 +2,21 @@ package wit.assignments.mobapp2_1.fragments
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.FragmentMapBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
-import wit.assignments.mobapp2_1.models.MarkModel
 
 class MapFragment : Fragment() {
 
     lateinit var app: MicaAppMain
     private var _fragBinding: FragmentMapBinding? = null
     private val fragBinding get() = _fragBinding!!
-
-    //Delete later, test var
-    var buttonPresses = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,20 +48,20 @@ class MapFragment : Fragment() {
 
     fun setButtonListener(layout: FragmentMapBinding) {
         layout.markMakerButton.setOnClickListener {
-            buttonPresses++
             Toast.makeText(
-                context, "Button has been pressed $buttonPresses times!",
+                context, "Creating mark",
                 Toast.LENGTH_SHORT
             ).show()
-            app.markStore.create(
-                MarkModel(
-                    messageText = "Press $buttonPresses",
-                    userName = "Bob",
-                    views = 200,
-                    goodRatings = 50,
-                    poorRatings = 6
-                )
-            )
+
+//            app.markStore.create(
+//                MarkModel(
+//                    messageText = "Press $buttonPresses",
+//                    userName = "Bob",
+//                    views = 200,
+//                    goodRatings = 50,
+//                    poorRatings = 6
+//                )
+//            )
         }
     }
 

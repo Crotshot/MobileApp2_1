@@ -24,13 +24,13 @@
             app:layout_constraintVertical_bias="0.097" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/postText"
             android:layout_width="344dp"
             android:layout_height="208dp"
             android:layout_marginTop="12dp"
             android:ems="10"
+            android:hint="@string/Hint_Text"
             android:inputType="textPersonName"
-            android:text="Message Text . . ."
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
@@ -47,7 +47,7 @@
             app:layout_constraintEnd_toStartOf="@+id/post_anon_button"
             app:layout_constraintHorizontal_bias="0.314"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/postText"
             app:layout_constraintVertical_bias="0.197" />
 
         <Button
@@ -59,7 +59,7 @@
             android:textColor="@color/color_accent_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/postText"
             app:layout_constraintVertical_bias="0.197" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
