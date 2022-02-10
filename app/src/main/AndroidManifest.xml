@@ -9,12 +9,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MobApp2_1">
+        android:theme="@style/Theme.MICA">
         <activity
-            android:name=".activities.Messages"
-            android:exported="false" />
-        <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

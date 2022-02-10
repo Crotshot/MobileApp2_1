@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/messagesFragment"
+        android:orderInCategory="100"
+        android:title="@string/action_messages"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/postFragment"
+        android:orderInCategory="100"
+        android:title="@string/action_post"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/messageViewFragment"
+        android:orderInCategory="100"
+        android:title="@string/action_message"
+        app:showAsAction="never" />
+</menu>

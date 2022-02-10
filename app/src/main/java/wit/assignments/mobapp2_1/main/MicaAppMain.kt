@@ -12,7 +12,6 @@ class MicaAppMain : Application() {
     override fun onCreate() {
         super.onCreate()
 
-
         Timber.plant(Timber.DebugTree())
         markStore = MarkMemStore()
         Timber.i("MICA Started")

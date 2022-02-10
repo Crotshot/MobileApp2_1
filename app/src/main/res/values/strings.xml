@@ -1,10 +1,22 @@
 <resources>
-    <string name="app_name">MobApp2_1</string>
+    <string name="app_name">M I C A</string>
     <string name="rate_good">Rate Good</string>
     <string name="rate_poor">Rate Poor</string>
+    <string name="post">Post</string>
+    <string name="back">Back</string>
     <string name="Test_1">Test 1</string>
     <string name="Test_2">Test 2</string>
     <string name="Test_3">Test 3</string>
-    <string name="action_main">Main</string>
+    <string name="Hint_Text">Mark Text . . .</string>
+    <string name="action_map">Map</string>
     <string name="action_messages">Messages</string>
+    <string name="action_post">Post</string>
+    <string name="action_message">Message</string>
+    <string name="add_mark">Add Mark</string>
+    <string name="group_communicate">T E S T</string>
+
+
+    <string name="nav_header_title">M I C A</string>
+    <string name="nav_header_subtitle">Leave your mark</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

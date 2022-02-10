@@ -10,6 +10,20 @@
     <color name="color_accent_dark">#091798</color>
     <color name="color_tertiary_dark">#4D7AE8</color>
 
+    <color name="color_good_color">#6C7BFF</color>
+    <color name="color_good_text">#072671</color>
+
+    <color name="color_poor_color">#F43B3B</color>
+    <color name="color_poor_text">#670C0C</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="centerColor_Light">#397E15</color>
+    <color name="endColor_Light">#57BA3B</color>
+    <color name="startColor_Light">#70FF77</color>
+
+    <color name="centerColor_Dark">#091C5E</color>
+    <color name="endColor_Dark">#293DA3</color>
+    <color name="startColor_Dark">#4D64D5</color>
 </resources>
