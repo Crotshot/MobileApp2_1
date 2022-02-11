@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.FragmentMessageViewBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
+import wit.assignments.mobapp2_1.models.MarkJSONStore
 import wit.assignments.mobapp2_1.models.MarkModel
 
 class MessageViewFragment : Fragment() {
@@ -31,7 +32,9 @@ class MessageViewFragment : Fragment() {
         val root = fragBinding.root
         activity?.title = getString(R.string.action_message)
 
-        val mark: MarkModel = arguments?.get("mark") as MarkModel
+        val markStore: MarkJSONStore = arguments?.get("markStore") as MarkJSONStore
+        val markID : Long = arguments?.getLong("id") as Long
+        val mark = markStore.findById(markID) as MarkModel
 
         fragBinding.userName.text = mark.userName
         fragBinding.goodRatingsText.text = mark.goodRatings.toString()
@@ -44,16 +47,19 @@ class MessageViewFragment : Fragment() {
         fragBinding.ratioBar.progress = mark.goodRatings
 
         fragBinding.backButton.setOnClickListener {
+            markStore.update(mark)
             exitMark()
         }
 
         fragBinding.rateGoodButton.setOnClickListener {
             mark.goodRatings++
+            markStore.update(mark)
             exitMark()
         }
 
         fragBinding.ratePoorButton.setOnClickListener {
             mark.poorRatings++
+            markStore.update(mark)
             exitMark()
         }
 
@@ -87,6 +93,7 @@ class MessageViewFragment : Fragment() {
         val manager : FragmentManager = requireFragmentManager()
         val fragment = MessagesFragment()
         val transaction = manager.beginTransaction()
+        transaction.setReorderingAllowed(true)
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
         transaction.replace(R.id.nav_host_fragment, fragment)
         transaction.addToBackStack(null)

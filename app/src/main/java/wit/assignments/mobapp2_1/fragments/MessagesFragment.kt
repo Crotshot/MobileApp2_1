@@ -11,7 +11,9 @@ import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.adapters.MarkAdapter
 import wit.assignments.mobapp2_1.databinding.FragmentMessagesBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
+import wit.assignments.mobapp2_1.models.MarkJSONStore
 import wit.assignments.mobapp2_1.models.MarkModel
+import wit.assignments.mobapp2_1.models.MarkStore
 
 class MessagesFragment : Fragment() {
 
@@ -34,7 +36,7 @@ class MessagesFragment : Fragment() {
         activity?.title = getString(R.string.action_messages)
 
         fragBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        fragBinding.recyclerView.adapter = MarkAdapter(app.markStore.findAll(), this)
+        fragBinding.recyclerView.adapter = MarkAdapter(app.markStore, this)
 
         return root
     }
@@ -64,15 +66,17 @@ class MessagesFragment : Fragment() {
     }
 
 
-    fun onCardClicked(mark : MarkModel){
+    fun onCardClicked(id : Long, markStore: MarkStore){
         val manager : FragmentManager = requireFragmentManager()
         val fragment = MessageViewFragment()
         val transaction = manager.beginTransaction()
+        transaction.setReorderingAllowed(true)
 
         val bundle = Bundle()
-        bundle.putParcelable("mark", mark)
-        fragment.arguments = bundle
+        bundle.putSerializable("markStore", markStore as MarkJSONStore)
+        bundle.putLong("id", id)
 
+        fragment.arguments = bundle
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
         transaction.replace(R.id.nav_host_fragment, fragment)
         transaction.addToBackStack(null)

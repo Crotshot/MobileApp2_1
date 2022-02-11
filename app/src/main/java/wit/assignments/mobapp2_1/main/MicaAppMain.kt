@@ -2,10 +2,12 @@ package wit.assignments.mobapp2_1.main
 
 import android.app.Application
 import timber.log.Timber
+import wit.assignments.mobapp2_1.models.MarkJSONStore
 import wit.assignments.mobapp2_1.models.MarkMemStore
 import wit.assignments.mobapp2_1.models.MarkStore
+import java.io.Serializable
 
-class MicaAppMain : Application() {
+class MicaAppMain : Application(), Serializable {
 
     lateinit var markStore: MarkStore
 
@@ -13,7 +15,8 @@ class MicaAppMain : Application() {
         super.onCreate()
 
         Timber.plant(Timber.DebugTree())
-        markStore = MarkMemStore()
+        markStore = MarkJSONStore(applicationContext)
+        markStore.start()
         Timber.i("MICA Started")
     }
 }

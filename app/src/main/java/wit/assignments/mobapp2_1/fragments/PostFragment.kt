@@ -93,6 +93,7 @@ class PostFragment : Fragment() {
         val manager : FragmentManager = requireFragmentManager()
         val fragment = MapFragment()
         val transaction = manager.beginTransaction()
+        transaction.setReorderingAllowed(true)
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
         transaction.replace(R.id.nav_host_fragment, fragment)
         transaction.addToBackStack(null)

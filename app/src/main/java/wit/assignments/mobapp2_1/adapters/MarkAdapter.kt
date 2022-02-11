@@ -9,8 +9,9 @@ import wit.assignments.mobapp2_1.databinding.CardMarkBinding
 import wit.assignments.mobapp2_1.fragments.MessageViewFragment
 import wit.assignments.mobapp2_1.fragments.MessagesFragment
 import wit.assignments.mobapp2_1.models.MarkModel
+import wit.assignments.mobapp2_1.models.MarkStore
 
-class MarkAdapter constructor(private var marks: List<MarkModel>, private var messagesFragment: MessagesFragment) : RecyclerView.Adapter<MarkAdapter.MainHolder>() {
+class MarkAdapter constructor(private var markStore: MarkStore , private var messagesFragment: MessagesFragment) : RecyclerView.Adapter<MarkAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardMarkBinding
@@ -20,11 +21,11 @@ class MarkAdapter constructor(private var marks: List<MarkModel>, private var me
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val mark = marks[holder.adapterPosition]
+        val mark = markStore.findAll()[holder.adapterPosition]
         holder.bind(mark)
     }
 
-    override fun getItemCount(): Int = marks.size
+    override fun getItemCount(): Int = markStore.findAll().size
 
     inner class MainHolder(val binding : CardMarkBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -37,7 +38,7 @@ class MarkAdapter constructor(private var marks: List<MarkModel>, private var me
 
             binding.pressableCard.setOnClickListener{
                 Timber.i("Card Pressed")
-                messagesFragment.onCardClicked(mark)
+                messagesFragment.onCardClicked(mark.id, markStore)
             }
         }
     }

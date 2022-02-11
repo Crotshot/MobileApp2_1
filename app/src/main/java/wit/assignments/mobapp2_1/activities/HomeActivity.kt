@@ -10,6 +10,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.ActivityHomeBinding
+import wit.assignments.mobapp2_1.main.MicaAppMain
+import wit.assignments.mobapp2_1.models.MarkJSONStore
 
 
 class HomeActivity : AppCompatActivity(){
@@ -27,15 +29,12 @@ class HomeActivity : AppCompatActivity(){
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-
         val navController = findNavController(R.id.nav_host_fragment)
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
     }
-
 }

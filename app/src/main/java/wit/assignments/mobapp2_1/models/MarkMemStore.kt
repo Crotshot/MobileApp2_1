@@ -11,6 +11,9 @@ internal fun getId(): Long {
 class MarkMemStore : MarkStore{
     val marks = ArrayList<MarkModel>()
 
+    override fun start() {
+    }
+
     override fun findAll(): List<MarkModel> {
         return marks
     }
@@ -30,6 +33,18 @@ class MarkMemStore : MarkStore{
         mark.id = getId()
         marks.remove(mark)
         logAll()
+    }
+
+    override fun update(mark: MarkModel) {
+        val foundMark: MarkModel? = marks.find { p -> p.id == mark.id }
+        if (foundMark != null) {
+            foundMark.poorRatings = mark.poorRatings
+            foundMark.goodRatings = mark.goodRatings
+            foundMark.views = mark.views
+            foundMark.messageText = mark.messageText
+            foundMark.userName = mark.userName
+            logAll()
+        }
     }
 
     fun logAll() {
