@@ -3,6 +3,7 @@ package wit.assignments.mobapp2_1.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.adapters.MarkAdapter
 import wit.assignments.mobapp2_1.databinding.FragmentMessagesBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
+import wit.assignments.mobapp2_1.models.MarkModel
 
 class MessagesFragment : Fragment() {
 
@@ -32,7 +34,7 @@ class MessagesFragment : Fragment() {
         activity?.title = getString(R.string.action_messages)
 
         fragBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        fragBinding.recyclerView.adapter = MarkAdapter(app.markStore.findAll())
+        fragBinding.recyclerView.adapter = MarkAdapter(app.markStore.findAll(), this)
 
         return root
     }
@@ -59,5 +61,21 @@ class MessagesFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item,
             requireView().findNavController()) || super.onOptionsItemSelected(item)
+    }
+
+
+    fun onCardClicked(mark : MarkModel){
+        val manager : FragmentManager = requireFragmentManager()
+        val fragment = MessageViewFragment()
+        val transaction = manager.beginTransaction()
+
+        val bundle = Bundle()
+        bundle.putParcelable("mark", mark)
+        fragment.arguments = bundle
+
+        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

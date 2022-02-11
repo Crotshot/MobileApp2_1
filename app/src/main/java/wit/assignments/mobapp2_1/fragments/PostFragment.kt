@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
@@ -88,6 +89,14 @@ class PostFragment : Fragment() {
                 userName = username
             )
         )
+
+        val manager : FragmentManager = requireFragmentManager()
+        val fragment = MapFragment()
+        val transaction = manager.beginTransaction()
+        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     override fun onDestroyView() {

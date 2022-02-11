@@ -1,14 +1,16 @@
 package wit.assignments.mobapp2_1.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import timber.log.Timber
+import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.CardMarkBinding
+import wit.assignments.mobapp2_1.fragments.MessageViewFragment
+import wit.assignments.mobapp2_1.fragments.MessagesFragment
 import wit.assignments.mobapp2_1.models.MarkModel
 
-class MarkAdapter constructor(private var marks: List<MarkModel>)
-    : RecyclerView.Adapter<MarkAdapter.MainHolder>() {
+class MarkAdapter constructor(private var marks: List<MarkModel>, private var messagesFragment: MessagesFragment) : RecyclerView.Adapter<MarkAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardMarkBinding
@@ -35,7 +37,7 @@ class MarkAdapter constructor(private var marks: List<MarkModel>)
 
             binding.pressableCard.setOnClickListener{
                 Timber.i("Card Pressed")
-                //TODO Open message view from here with card information
+                messagesFragment.onCardClicked(mark)
             }
         }
     }

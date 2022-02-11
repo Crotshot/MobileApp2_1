@@ -60,15 +60,6 @@ class MapFragment : Fragment() {
             transaction.replace(R.id.nav_host_fragment, fragment)
             transaction.addToBackStack(null)
             transaction.commit()
-//            app.markStore.create(
-//                MarkModel(
-//                    messageText = "Press $buttonPresses",
-//                    userName = "Bob",
-//                    views = 200,
-//                    goodRatings = 50,
-//                    poorRatings = 6
-//                )
-//            )
         }
     }
 
