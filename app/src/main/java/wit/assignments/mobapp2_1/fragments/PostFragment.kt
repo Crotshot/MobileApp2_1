@@ -5,9 +5,11 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
+import wit.assignments.mobapp2_1.activities.HomeActivity
 import wit.assignments.mobapp2_1.databinding.FragmentMapBinding
 import wit.assignments.mobapp2_1.databinding.FragmentPostBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
@@ -55,6 +57,9 @@ class PostFragment : Fragment() {
             ).show()
             //TODO -> Assignment 2 add image
         }
+        layout.cancelButton.setOnClickListener {
+            leaveFrag()
+        }
         layout.postButton.setOnClickListener {
             post(false, layout)
         }
@@ -65,10 +70,12 @@ class PostFragment : Fragment() {
 
     fun post(anon : Boolean,layout: FragmentPostBinding){
         val markText : String = layout.postText.text.toString()
+        val homeActivity : HomeActivity = activity as HomeActivity
+
         val username : String = if(anon)
             "Anonymous"
         else
-            "Bob" //TODO -> Assingment 2 get username
+            homeActivity.getUserName()
 
         if(markText.isEmpty()) {//TODO-> Assingment 2 add sensoring of poor language
             Toast.makeText(
@@ -90,6 +97,10 @@ class PostFragment : Fragment() {
             )
         )
 
+        leaveFrag()
+    }
+
+    fun leaveFrag(){
         val manager : FragmentManager = requireFragmentManager()
         val fragment = MapFragment()
         val transaction = manager.beginTransaction()

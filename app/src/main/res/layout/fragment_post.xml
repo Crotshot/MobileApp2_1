@@ -45,15 +45,28 @@
             android:textColor="@color/color_accent_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/post_anon_button"
-            app:layout_constraintHorizontal_bias="0.314"
+            app:layout_constraintHorizontal_bias="0.242"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postText"
+            app:layout_constraintVertical_bias="0.197" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textColor="@color/color_accent_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/post_anon_button"
+            app:layout_constraintHorizontal_bias="0.941"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postText"
             app:layout_constraintVertical_bias="0.197" />
 
         <Button
             android:id="@+id/post_anon_button"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_width="159dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="28dp"
             android:text="Post Anonymous"
             android:textColor="@color/color_accent_light"

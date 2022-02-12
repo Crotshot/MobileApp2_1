@@ -2,11 +2,13 @@ package wit.assignments.mobapp2_1.fragments
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
+import wit.assignments.mobapp2_1.activities.HomeActivity
 import wit.assignments.mobapp2_1.databinding.FragmentMessageViewBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
 import wit.assignments.mobapp2_1.models.MarkJSONStore
@@ -40,27 +42,48 @@ class MessageViewFragment : Fragment() {
         fragBinding.goodRatingsText.text = mark.goodRatings.toString()
         fragBinding.poorRatingsText.text = mark.poorRatings.toString()
         //fragBinding.markImage = mark.image //TODO-> Assignment 2
-        mark.views++
         fragBinding.viewsText.text = mark.views.toString()
         fragBinding.markText.text = mark.messageText
         fragBinding.ratioBar.max = (mark.goodRatings + mark.poorRatings)
         fragBinding.ratioBar.progress = mark.goodRatings
 
-        fragBinding.backButton.setOnClickListener {
-            markStore.update(mark)
-            exitMark()
-        }
 
-        fragBinding.rateGoodButton.setOnClickListener {
-            mark.goodRatings++
-            markStore.update(mark)
-            exitMark()
-        }
+        val homeActivity : HomeActivity = activity as HomeActivity
 
-        fragBinding.ratePoorButton.setOnClickListener {
-            mark.poorRatings++
-            markStore.update(mark)
-            exitMark()
+        if(mark.userName.equals(homeActivity.getUserName())){
+            fragBinding.ownedButtons.visibility = View.VISIBLE
+            fragBinding.notOwnedButtons.visibility = View.GONE
+            fragBinding.backButtonO.setOnClickListener {
+                markStore.update(mark)
+                exitMark()
+            }
+
+            fragBinding.deleteButton.setOnClickListener {
+                markStore.destroy(mark)
+                exitMark()
+            }
+        }
+        else{
+            mark.views++
+            fragBinding.ownedButtons.visibility = View.GONE
+            fragBinding.notOwnedButtons.visibility = View.VISIBLE
+
+            fragBinding.backButton.setOnClickListener {
+                markStore.update(mark)
+                exitMark()
+            }
+
+            fragBinding.rateGoodButton.setOnClickListener {
+                mark.goodRatings++
+                markStore.update(mark)
+                exitMark()
+            }
+
+            fragBinding.ratePoorButton.setOnClickListener {
+                mark.poorRatings++
+                markStore.update(mark)
+                exitMark()
+            }
         }
 
         return root

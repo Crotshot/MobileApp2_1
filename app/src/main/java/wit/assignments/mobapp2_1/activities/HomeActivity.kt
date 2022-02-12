@@ -15,9 +15,10 @@ import wit.assignments.mobapp2_1.models.MarkJSONStore
 
 
 class HomeActivity : AppCompatActivity(){
-
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var activityHomeBinding : ActivityHomeBinding
+
+    private val userName : String = "Test_User"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,5 +37,9 @@ class HomeActivity : AppCompatActivity(){
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
+    }
+
+    fun getUserName() : String{
+        return userName
     }
 }

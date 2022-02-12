@@ -39,7 +39,7 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
     }
 
     override fun create(mark: MarkModel) {
-        mark.id = getId()
+        mark.id = generateRandomId()
         marks.add(mark)
         logAll()
         serialize()
