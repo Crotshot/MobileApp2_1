@@ -90,12 +90,14 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
                     }
                 }
             }
-            else
-                for (mark : MarkModel in marks) {
-                    if (!mark.messageText.contains(filter)) { //Filter by message
+            else {
+                val name = filter.substring(1, filter.lastIndex)
+                for (mark: MarkModel in marks) {
+                    if (!mark.messageText.contains(name)) { //Filter by message
                         tMarks += mark
                     }
                 }
+            }
         }
         else if(filter.first() == '@' && filter.length > 1){
             val name = filter.substring(1,filter.lastIndex) //Filter by user name
