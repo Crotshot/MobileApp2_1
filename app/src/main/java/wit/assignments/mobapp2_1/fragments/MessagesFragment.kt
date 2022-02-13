@@ -2,17 +2,18 @@ package wit.assignments.mobapp2_1.fragments
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
+import timber.log.Timber
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.adapters.MarkAdapter
 import wit.assignments.mobapp2_1.databinding.FragmentMessagesBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
 import wit.assignments.mobapp2_1.models.MarkJSONStore
-import wit.assignments.mobapp2_1.models.MarkModel
 import wit.assignments.mobapp2_1.models.MarkStore
 
 class MessagesFragment : Fragment() {
@@ -36,7 +37,28 @@ class MessagesFragment : Fragment() {
         activity?.title = getString(R.string.action_messages)
 
         fragBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        fragBinding.recyclerView.adapter = MarkAdapter(app.markStore, this)
+        fragBinding.recyclerView.adapter = MarkAdapter(app.markStore, "", this)
+
+        fragBinding.searchBar.setOnSearchClickListener {
+            Timber.i("Editing Search Bar")
+        }
+
+        val t = this
+        fragBinding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Timber.i("Confirmed Searching : ${fragBinding.searchBar.query}")
+                fragBinding.recyclerView.adapter = null
+                fragBinding.recyclerView.adapter = MarkAdapter(app.markStore, fragBinding.searchBar.query.toString(), t)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Timber.i("Text Changed Searching : ${fragBinding.searchBar.query}")
+                fragBinding.recyclerView.adapter = null
+                fragBinding.recyclerView.adapter = MarkAdapter(app.markStore, fragBinding.searchBar.query.toString(), t)
+                return true
+            }
+        })
 
         return root
     }

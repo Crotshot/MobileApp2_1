@@ -13,6 +13,7 @@
     <string name="action_post">Post</string>
     <string name="action_message">Message</string>
     <string name="add_mark">Add Mark</string>
+    <string name="search_hint">Use @ to filter username</string>
     <string name="group_communicate">T E S T</string>
 
 

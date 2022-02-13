@@ -11,6 +11,8 @@
         android:id="@+id/pressable_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/color_primary_light"
+        android:backgroundTint="@color/color_primary_light"
         android:padding="16dp">
 
         <TextView
@@ -35,6 +37,7 @@
             android:layout_marginEnd="4dp"
             android:textAlignment="textEnd"
             android:textSize="16sp"
+            android:textStyle="bold"
             tools:text="Bob the Magnificant" />
 
         <TextView
@@ -47,7 +50,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:layout_toStartOf="@+id/message_card_text"
-            android:textAlignment="textStart"
+            android:background="@color/color_tertiary_light"
+            android:textAlignment="center"
+            android:textColor="#B9F6CA"
             android:textSize="20sp"
             tools:text="9999" />
 
@@ -61,7 +66,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:layout_toStartOf="@+id/message_card_text"
-            android:textAlignment="textStart"
+            android:background="@color/color_good_color"
+            android:textAlignment="center"
+            android:textColor="@color/color_good_text"
             android:textSize="20sp"
             tools:text="Good" />
 
@@ -75,7 +82,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:layout_toStartOf="@+id/message_card_text"
-            android:textAlignment="textStart"
+            android:background="@color/color_poor_color"
+            android:textAlignment="center"
+            android:textColor="@color/color_poor_text"
             android:textSize="20sp"
             tools:text="Poor" />
 

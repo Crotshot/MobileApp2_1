@@ -27,6 +27,11 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
 
     override fun start(){
         deserialize()
+//        marks += MarkModel(-6516622895001943186, "Praise the Sun!", "Solaire",123,108,1)
+//        marks += MarkModel(-4566622857846986976, "If at first you do not succeed, try, try and TRY AGAIN!!!", "Patches",44,5,34)
+//        marks += MarkModel(-6516622857846943186, "Time for Crab", "Anonymous",149,130,1)
+//        marks += MarkModel(-4316622857846867186, "I would not trust that Patches guy, he always seems to be up not good trickery", "Anonymous",282,257,11)
+//        marks += MarkModel(-6666622857846867666, "Mmmmmmm, mmmmmmm, hmm?", "Siegmeyer",5,3,1)
     }
 
     override fun findAll(): List<MarkModel> {
@@ -56,6 +61,57 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
             logAll()
             serialize()
         }
+    }
+
+    override fun filterFind(filter: String): List<MarkModel> {
+        if(filter.isEmpty())
+                return marks
+
+        var tMarks : List<MarkModel> = emptyList()
+//        for (mark : MarkModel in marks){
+//            if(filter.first() == '@' && filter.length > 1){
+//                val name = filter.substring(1,filter.lastIndex) //Filter by user name
+//                if(mark.userName.contains(name) || filter == "") {
+//                    tMarks += mark
+//                }
+//            }
+//            else
+//                if(mark.messageText.contains(filter)) { //Filter by message
+//                    tMarks += mark
+//                }
+//        }
+
+        if(filter.first() == '!' && filter.length > 1){
+            if(filter[1] == '@' && filter.length > 2){
+                val name = filter.substring(2,filter.lastIndex) //Filter by user name
+                for (mark : MarkModel in marks) {
+                    if (!mark.userName.contains(name)) {
+                        tMarks += mark
+                    }
+                }
+            }
+            else
+                for (mark : MarkModel in marks) {
+                    if (!mark.messageText.contains(filter)) { //Filter by message
+                        tMarks += mark
+                    }
+                }
+        }
+        else if(filter.first() == '@' && filter.length > 1){
+            val name = filter.substring(1,filter.lastIndex) //Filter by user name
+            for (mark : MarkModel in marks) {
+                if (mark.userName.contains(name) || filter == "") {
+                    tMarks += mark
+                }
+            }
+        }
+        else
+            for (mark : MarkModel in marks) {
+                if (mark.messageText.contains(filter)) { //Filter by message
+                    tMarks += mark
+                }
+            }
+        return tMarks
     }
 
     override fun destroy(mark: MarkModel) {

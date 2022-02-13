@@ -47,6 +47,10 @@ class MarkMemStore : MarkStore{
         }
     }
 
+    override fun filterFind(filter: String): List<MarkModel> {
+        return marks
+    }
+
     fun logAll() {
         Timber.v("** Donation List **")
         marks.forEach { Timber.v("Donate ${it}") }

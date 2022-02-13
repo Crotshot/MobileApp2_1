@@ -7,4 +7,5 @@ interface MarkStore {
     fun create(mark: MarkModel)
     fun destroy(mark: MarkModel)
     fun update(mark: MarkModel)
+    fun filterFind(filter: String) : List<MarkModel>
 }
