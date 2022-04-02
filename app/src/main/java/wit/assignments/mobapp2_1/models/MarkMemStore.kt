@@ -42,6 +42,7 @@ class MarkMemStore : MarkStore{
             foundMark.goodRatings = mark.goodRatings
             foundMark.views = mark.views
             foundMark.messageText = mark.messageText
+            foundMark.messageImage = mark.messageImage
             foundMark.userName = mark.userName
             logAll()
         }
@@ -52,7 +53,7 @@ class MarkMemStore : MarkStore{
     }
 
     fun logAll() {
-        Timber.v("** Donation List **")
-        marks.forEach { Timber.v("Donate ${it}") }
+        Timber.v("List of all known Marks")
+        marks.forEach { Timber.v("Mark: ${it}") }
     }
 }

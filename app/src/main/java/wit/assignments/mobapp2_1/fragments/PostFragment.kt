@@ -1,25 +1,34 @@
 package wit.assignments.mobapp2_1.fragments
 
+import android.app.Activity.RESULT_OK
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.*
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.activities.HomeActivity
-import wit.assignments.mobapp2_1.databinding.FragmentMapBinding
 import wit.assignments.mobapp2_1.databinding.FragmentPostBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
 import wit.assignments.mobapp2_1.models.MarkModel
+
 
 class PostFragment : Fragment() {
 
     lateinit var app: MicaAppMain
     private var _fragBinding: FragmentPostBinding? = null
     private val fragBinding get() = _fragBinding!!
+    private val REQUEST_IMAGE_CAPTURE = 101
+    lateinit var imageButt : ImageButton
+    private var bitMap : Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +59,14 @@ class PostFragment : Fragment() {
 
 
     fun setButtonListeners(layout: FragmentPostBinding) {
+        imageButt = layout.imageButton
         layout.imageButton.setOnClickListener {
-            Toast.makeText(
-                context, "Taking Picture",
-                Toast.LENGTH_SHORT
-            ).show()
-            //TODO -> Assignment 2 add image
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            } catch (e: ActivityNotFoundException) {
+                // display error state to the user
+            }
         }
         layout.cancelButton.setOnClickListener {
             leaveFrag()
@@ -77,7 +88,7 @@ class PostFragment : Fragment() {
         else
             homeActivity.getUserName()
 
-        if(markText.isEmpty()) {//TODO-> Assingment 2 add sensoring of poor language
+        if(markText.isEmpty()) {//TODO-> Assignment 2 add sensoring of poor language
             Toast.makeText(
                 context, "Mark text empty, please enter some text",
                 Toast.LENGTH_SHORT
@@ -91,9 +102,11 @@ class PostFragment : Fragment() {
         ).show()
 
         app.markStore.create(
+            //var conf : Bitmap.Config = Bitmap.Config.ARGB_8888; // see other conf types
             MarkModel(
                 messageText = markText,
-                userName = username
+                userName = username,
+                messageImage = bitMap
             )
         )
 
@@ -124,5 +137,14 @@ class PostFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item,
             requireView().findNavController()) || super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            val extras = data?.extras
+            bitMap= extras?.get("data") as Bitmap
+            imageButt.setImageBitmap(bitMap)
+            print(bitMap)
+        }
     }
 }

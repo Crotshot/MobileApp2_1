@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "111549722580",
+    "project_id": "mica-340917",
+    "storage_bucket": "mica-340917.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111549722580:android:c080b99cc681857fd43041",
+        "android_client_info": {
+          "package_name": "wit.assignments.mobapp2_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111549722580-080cvjoac5t7e4nu3u4e0llmvuahllg3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7R4XBG-GxyuKCAANUFE6pbpBqlSw8wz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111549722580-080cvjoac5t7e4nu3u4e0llmvuahllg3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

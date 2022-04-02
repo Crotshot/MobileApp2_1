@@ -41,7 +41,8 @@ class MessageViewFragment : Fragment() {
         fragBinding.userName.text = mark.userName
         fragBinding.goodRatingsText.text = mark.goodRatings.toString()
         fragBinding.poorRatingsText.text = mark.poorRatings.toString()
-        //fragBinding.markImage = mark.image //TODO-> Assignment 2
+        if(mark.messageImage != null)
+            fragBinding.messageImage.setImageBitmap(mark.messageImage)
         fragBinding.viewsText.text = mark.views.toString()
         fragBinding.markText.text = mark.messageText
         fragBinding.ratioBar.max = (mark.goodRatings + mark.poorRatings)

@@ -22,19 +22,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/mark_Text"
-            android:layout_width="350dp"
-            android:layout_height="151dp"
-            android:layout_marginTop="192dp"
+            android:layout_width="343dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="204dp"
             android:text=". . ."
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/good_Ratings_Text"
@@ -76,9 +75,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/mark_Image"
-            android:layout_width="354dp"
-            android:layout_height="253dp"
+            android:id="@+id/messageImage"
+            android:layout_width="351dp"
+            android:layout_height="332dp"
+            android:adjustViewBounds="true"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
             android:src="@android:drawable/alert_dark_frame"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

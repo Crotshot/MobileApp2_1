@@ -27,11 +27,11 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
 
     override fun start(){
         deserialize()
-//        marks += MarkModel(-6516622895001943186, "Praise the Sun!", "Solaire",123,108,1)
-//        marks += MarkModel(-4566622857846986976, "If at first you do not succeed, try, try and TRY AGAIN!!!", "Patches",44,5,34)
-//        marks += MarkModel(-6516622857846943186, "Time for Crab", "Anonymous",149,130,1)
-//        marks += MarkModel(-4316622857846867186, "I would not trust that Patches guy, he always seems to be up not good trickery", "Anonymous",282,257,11)
-//        marks += MarkModel(-6666622857846867666, "Mmmmmmm, mmmmmmm, hmm?", "Siegmeyer",5,3,1)
+//        marks += MarkModel(-6516622895001943186, "Praise the Sun!", null, "Solaire",123,108,1)
+//        marks += MarkModel(-4566622857846986976, "If at first you do not succeed, try, try and TRY AGAIN!!!", null, "Patches",44,5,34)
+//        marks += MarkModel(-6516622857846943186, "Time for Crab", null, "Anonymous",149,130,1)
+//        marks += MarkModel(-4316622857846867186, "I would not trust that Patches guy, he always seems to be up not good trickery", null, "Anonymous",282,257,11)
+//        marks += MarkModel(-6666622857846867666, "Mmmmmmm, mmmmmmm, hmm?", null, "Siegmeyer",5,3,1)
     }
 
     override fun findAll(): List<MarkModel> {
@@ -57,6 +57,7 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
             foundMark.goodRatings = mark.goodRatings
             foundMark.views = mark.views
             foundMark.messageText = mark.messageText
+            foundMark.messageImage = mark.messageImage
             foundMark.userName = mark.userName
             logAll()
             serialize()
@@ -68,18 +69,6 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
                 return marks
 
         var tMarks : List<MarkModel> = emptyList()
-//        for (mark : MarkModel in marks){
-//            if(filter.first() == '@' && filter.length > 1){
-//                val name = filter.substring(1,filter.lastIndex) //Filter by user name
-//                if(mark.userName.contains(name) || filter == "") {
-//                    tMarks += mark
-//                }
-//            }
-//            else
-//                if(mark.messageText.contains(filter)) { //Filter by message
-//                    tMarks += mark
-//                }
-//        }
 
         if(filter.first() == '!' && filter.length > 1){
             if(filter[1] == '@' && filter.length > 2){
@@ -124,8 +113,8 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
     }
 
     fun logAll() {
-        Timber.v("** Donation List **")
-        marks.forEach { Timber.v("Donate ${it}") }
+        Timber.v("List of all known Marks")
+        marks.forEach { Timber.v("Mark: ${it}") }
     }
 
     private fun serialize() {
