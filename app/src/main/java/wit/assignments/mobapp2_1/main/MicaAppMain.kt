@@ -9,14 +9,14 @@ import java.io.Serializable
 
 class MicaAppMain : Application(), Serializable {
 
-    lateinit var markStore: MarkStore
+    //lateinit var markStore: MarkStore
 
     override fun onCreate() {
         super.onCreate()
 
         Timber.plant(Timber.DebugTree())
-        markStore = MarkJSONStore(applicationContext)
-        markStore.start()
+        //markStore = MarkJSONStore(applicationContext)
+        //markStore.start()
         Timber.i("MICA Started")
     }
 }

@@ -17,19 +17,21 @@
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_messages.xml" value="0.36666666666666664" />
-        <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_signin.xml" value="0.5" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/layout/activity_signin.xml" value="0.25" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/app_bar_home.xml" value="0.33" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/card_mark.xml" value="0.33" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/fragment_map.xml" value="0.25" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/fragment_message_view.xml" value="0.5" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/fragment_messages.xml" value="0.33" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/fragment_post.xml" value="0.5684292379471229" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/layout/loading.xml" value="0.5027173913043478" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/layout/nav_header.xml" value="0.21422101449275363" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/menu/menu_map.xml" value="0.36666666666666664" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/menu/menu_messages.xml" value="0.25" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/menu/nav_drawer_menu.xml" value="0.33" />
         <entry key="..\:/MobileApp2_1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2725" />
+        <entry key="..\:/MobileApp2_1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3685" />
       </map>
     </option>
   </component>
