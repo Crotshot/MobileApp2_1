@@ -18,9 +18,8 @@ import wit.assignments.mobapp2_1.helpers.showLoader
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener{
 
-    // [START declare_auth]
-    private lateinit var auth: FirebaseAuth
-    // [END declare_auth]
+
+    private lateinit var auth: FirebaseAuth // Declare Auth
     lateinit var loader : AlertDialog
     private lateinit var signinBinding: ActivitySigninBinding
 
@@ -29,57 +28,42 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         signinBinding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(signinBinding.root)
 
-        // Buttons
         signinBinding.emailSignInButton.setOnClickListener(this)
         signinBinding.emailCreateAccountButton.setOnClickListener(this)
         signinBinding.signOutButton.setOnClickListener(this)
         signinBinding.verifyEmailButton.setOnClickListener(this)
 
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
-        // [END initialize_auth]
+        auth = FirebaseAuth.getInstance()// Initialize Firebase Auth
         loader = createLoader(this)
     }
 
-    // [START on_start_check_user]
-    public override fun onStart() {
+    public override fun onStart() {//on_start_check_user
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+        val currentUser = auth.currentUser// Check if user is signed in (non-null) and update UI accordingly.
         updateUI(currentUser)
     }
-    // [END on_start_check_user]
 
     private fun createAccount(email: String, password: String) {
         Timber.d( "createAccount:$email")
         if (!validateForm()) {
             return
         }
-
         showLoader(loader, "Creating Account...")
-
-        // [START create_user_with_email]
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+                if (task.isSuccessful) {// Sign in success, update UI with the signed-in user's information
                     Timber.d( "createUserWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
+                } else { // If sign in fails, display a message to the user.
                     Timber.w( "createUserWithEmail:failure $task.exception")
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
                 }
 
-                // [START_EXCLUDE]
-                hideLoader(loader)
-                // [END_EXCLUDE]
+                hideLoader(loader)//EXCLUDE
             }
-        // [END create_user_with_email]
     }
 
     private fun signIn(email: String, password: String) {
@@ -87,33 +71,25 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         if (!validateForm()) {
             return
         }
-
         showLoader(loader, "Logging In...")
-
-        // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+                if (task.isSuccessful) {// Sign in success, update UI with the signed-in user's information
                     Timber.d( "signInWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
+                } else {// If sign in fails, display a message to the user.
                     Timber.w( "signInWithEmail:failure $task.exception")
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
                 }
 
-                // [START_EXCLUDE]
-                if (!task.isSuccessful) {
+                if (!task.isSuccessful) {//EXCLUDE
                     signinBinding.status.setText(R.string.auth_failed)
                 }
                 hideLoader(loader)
-                // [END_EXCLUDE]
             }
-        // [END sign_in_with_email]
     }
 
     private fun signOut() {
@@ -122,18 +98,11 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
     }
 
     private fun sendEmailVerification() {
-        // Disable button
-        signinBinding.verifyEmailButton.isEnabled = false
-
-        // Send verification email
-        // [START send_email_verification]
+        signinBinding.verifyEmailButton.isEnabled = false// Disable button
         val user = auth.currentUser
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener(this) { task ->
-                // [START_EXCLUDE]
-                // Re-enable button
-                signinBinding.verifyEmailButton.isEnabled = true
-
+        user?.sendEmailVerification()// Send verification email
+            ?.addOnCompleteListener(this) { task ->// EXCLUDE
+                signinBinding.verifyEmailButton.isEnabled = true// Re-enable button
                 if (task.isSuccessful) {
                     Toast.makeText(baseContext,
                         "Verification email sent to ${user.email} ",
@@ -144,49 +113,41 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
                         "Failed to send verification email.",
                         Toast.LENGTH_SHORT).show()
                 }
-                // [END_EXCLUDE]
             }
-        // [END send_email_verification]
     }
 
     private fun validateForm(): Boolean {
-        var valid = true
-
         val email = signinBinding.fieldEmail.text.toString()
+        val password = signinBinding.fieldPassword.text.toString()
+
         if (TextUtils.isEmpty(email)) {
             signinBinding.fieldEmail.error = "Required."
-            valid = false
+            return false
         } else {
             signinBinding.fieldEmail.error = null
         }
 
-        val password = signinBinding.fieldPassword.text.toString()
         if (TextUtils.isEmpty(password)) {
             signinBinding.fieldPassword.error = "Required."
-            valid = false
+            return false
         } else {
             signinBinding.fieldPassword.error = null
         }
-
-        return valid
+        return true
     }
 
     private fun updateUI(user: FirebaseUser?) {
         hideLoader(loader)
         if (user != null) {
-            signinBinding.status.text = getString(R.string.emailpassword_status_fmt,
-                user.email, user.isEmailVerified)
+            signinBinding.status.text = getString(R.string.emailpassword_status_fmt, user.email, user.isEmailVerified)
             signinBinding.detail.text = getString(R.string.firebase_status_fmt, user.uid)
-
             signinBinding.emailPasswordButtons.visibility = View.GONE
             signinBinding.emailPasswordFields.visibility = View.GONE
             signinBinding.signedInButtons.visibility = View.VISIBLE
-
             signinBinding.verifyEmailButton.isEnabled = !user.isEmailVerified
         } else {
             signinBinding.status.setText(R.string.signed_out)
             signinBinding.detail.text = null
-
             signinBinding.emailPasswordButtons.visibility = View.VISIBLE
             signinBinding.emailPasswordFields.visibility = View.VISIBLE
             signinBinding.signedInButtons.visibility = View.GONE
