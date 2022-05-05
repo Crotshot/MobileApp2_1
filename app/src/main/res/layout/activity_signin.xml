@@ -239,6 +239,16 @@
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
 
             <Button
+                android:id="@+id/enterButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/enter"
+                android:theme="@style/ThemeOverlay.MyDarkButton"
+                android:visibility="gone" />
+
+            <Button
                 android:id="@+id/verifyEmailButton"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="0dp"

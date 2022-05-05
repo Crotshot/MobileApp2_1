@@ -15,8 +15,8 @@ class MicaAppMain : Application(), Serializable {
         super.onCreate()
 
         Timber.plant(Timber.DebugTree())
-        //markStore = MarkJSONStore(applicationContext)
-        //markStore.start()
+        markStore = MarkJSONStore(applicationContext)
+        markStore.start()
         Timber.i("MICA Started")
     }
 }

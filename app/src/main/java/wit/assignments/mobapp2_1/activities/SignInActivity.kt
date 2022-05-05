@@ -1,6 +1,7 @@
 package wit.assignments.mobapp2_1.activities
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -17,8 +18,6 @@ import wit.assignments.mobapp2_1.helpers.showLoader
 
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener{
-
-
     private lateinit var auth: FirebaseAuth // Declare Auth
     lateinit var loader : AlertDialog
     private lateinit var signinBinding: ActivitySigninBinding
@@ -32,6 +31,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         signinBinding.emailCreateAccountButton.setOnClickListener(this)
         signinBinding.signOutButton.setOnClickListener(this)
         signinBinding.verifyEmailButton.setOnClickListener(this)
+        signinBinding.enterButton.setOnClickListener(this)
 
         auth = FirebaseAuth.getInstance()// Initialize Firebase Auth
         loader = createLoader(this)
@@ -144,7 +144,19 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
             signinBinding.emailPasswordButtons.visibility = View.GONE
             signinBinding.emailPasswordFields.visibility = View.GONE
             signinBinding.signedInButtons.visibility = View.VISIBLE
-            signinBinding.verifyEmailButton.isEnabled = !user.isEmailVerified
+            if (user.isEmailVerified){
+                signinBinding.verifyEmailButton.visibility = View.GONE
+                signinBinding.enterButton.visibility = View.VISIBLE
+                signinBinding.verifyEmailButton.isEnabled = false
+                signinBinding.enterButton.isEnabled = true
+            }
+            else{
+                signinBinding.verifyEmailButton.visibility = View.VISIBLE
+                signinBinding.enterButton.visibility = View.GONE
+                signinBinding.verifyEmailButton.isEnabled = true
+                signinBinding.enterButton.isEnabled = false
+            }
+
         } else {
             signinBinding.status.setText(R.string.signed_out)
             signinBinding.detail.text = null
@@ -154,6 +166,15 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         }
     }
 
+    private fun EnterApp() {
+        var userId = auth.currentUser?.uid
+
+        var resultIntent : Intent = Intent()
+        resultIntent.putExtra("userId", userId)
+        setResult(RESULT_OK, resultIntent)
+        finish()
+    }
+
     override fun onClick(v: View) {
         val i = v.id
         when (i) {
@@ -161,6 +182,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
             R.id.emailSignInButton -> signIn(signinBinding.fieldEmail.text.toString(), signinBinding.fieldPassword.text.toString())
             R.id.signOutButton -> signOut()
             R.id.verifyEmailButton -> sendEmailVerification()
+            R.id.enterButton -> EnterApp()
         }
     }
 
