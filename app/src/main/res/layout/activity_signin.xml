@@ -208,6 +208,11 @@
                 android:text="@string/sign_in"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
 
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/googleSignIn"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
             <Button
                 android:id="@+id/emailCreateAccountButton"
                 style="@style/Widget.AppCompat.Button.Colored"
@@ -216,6 +221,7 @@
                 android:layout_weight="1"
                 android:text="@string/create_account"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
+
         </LinearLayout>
 
         <LinearLayout

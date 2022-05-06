@@ -7,8 +7,13 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import timber.log.Timber
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.ActivitySigninBinding
@@ -21,6 +26,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var auth: FirebaseAuth // Declare Auth
     lateinit var loader : AlertDialog
     private lateinit var signinBinding: ActivitySigninBinding
+    private lateinit var mGoogleSignInClient : GoogleSignInClient
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +38,22 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         signinBinding.signOutButton.setOnClickListener(this)
         signinBinding.verifyEmailButton.setOnClickListener(this)
         signinBinding.enterButton.setOnClickListener(this)
+        signinBinding.googleSignIn.setOnClickListener(this)
 
         auth = FirebaseAuth.getInstance()// Initialize Firebase Auth
         loader = createLoader(this)
+
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("111549722580-080cvjoac5t7e4nu3u4e0llmvuahllg3.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
     public override fun onStart() {//on_start_check_user
         super.onStart()
+        val account = GoogleSignIn.getLastSignedInAccount(this)
         val currentUser = auth.currentUser// Check if user is signed in (non-null) and update UI accordingly.
         updateUI(currentUser)
     }
@@ -65,6 +80,46 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
                 hideLoader(loader)//EXCLUDE
             }
     }
+    //region Google Sign In
+    private fun googleSignIn(){
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val exception = task.exception
+            if(task.isSuccessful) {
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    Timber.i("firebaseAuthWithGoogle:%s", account.id)
+                    firebaseAuthWithGoogle(account.idToken!!)
+                } catch (e: ApiException) {
+                    Timber.i("Google sign in failed")
+                }
+            }
+            else{
+                Timber.i("Google sign in failed%s", exception.toString())
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Timber.i("signInWithCredential:success")
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    Timber.i("signInWithCredential:failure%s", task.exception)
+                }
+            }
+    }
+    //endregion
 
     private fun signIn(email: String, password: String) {
         Timber.d( "signIn:$email")
@@ -166,6 +221,18 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         }
     }
 
+    override fun onClick(v: View) {
+        val i = v.id
+        when (i) {
+            R.id.emailCreateAccountButton -> createAccount(signinBinding.fieldEmail.text.toString(), signinBinding.fieldPassword.text.toString())
+            R.id.emailSignInButton -> signIn(signinBinding.fieldEmail.text.toString(), signinBinding.fieldPassword.text.toString())
+            R.id.signOutButton -> signOut()
+            R.id.verifyEmailButton -> sendEmailVerification()
+            R.id.enterButton -> EnterApp()
+            R.id.googleSignIn -> googleSignIn()
+        }
+    }
+
     private fun EnterApp() {
         var userId = auth.currentUser?.uid
 
@@ -175,18 +242,11 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         finish()
     }
 
-    override fun onClick(v: View) {
-        val i = v.id
-        when (i) {
-            R.id.emailCreateAccountButton -> createAccount(signinBinding.fieldEmail.text.toString(), signinBinding.fieldPassword.text.toString())
-            R.id.emailSignInButton -> signIn(signinBinding.fieldEmail.text.toString(), signinBinding.fieldPassword.text.toString())
-            R.id.signOutButton -> signOut()
-            R.id.verifyEmailButton -> sendEmailVerification()
-            R.id.enterButton -> EnterApp()
-        }
+//    companion object {
+//        private const val TAG = "EmailPassword"
+//    }
+    companion object{
+        private const val RC_SIGN_IN = 0
     }
 
-    companion object {
-        private const val TAG = "EmailPassword"
-    }
 }
