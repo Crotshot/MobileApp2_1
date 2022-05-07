@@ -23,7 +23,7 @@ import wit.assignments.mobapp2_1.helpers.showLoader
 
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener{
-    private lateinit var auth: FirebaseAuth // Declare Auth
+    private lateinit var auth: FirebaseAuth
     lateinit var loader : AlertDialog
     private lateinit var signinBinding: ActivitySigninBinding
     private lateinit var mGoogleSignInClient : GoogleSignInClient
@@ -40,7 +40,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener{
         signinBinding.enterButton.setOnClickListener(this)
         signinBinding.googleSignIn.setOnClickListener(this)
 
-        auth = FirebaseAuth.getInstance()// Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
         loader = createLoader(this)
 
 

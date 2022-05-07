@@ -29,9 +29,18 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(resultCode == 10){
+            val intent = Intent(this, SignInActivity::class.java)
+            Timber.i("Opening Sign In Activity")
+            startActivityForResult(intent,2)
+        }
+        else{
             val intent = Intent(this, HomeActivity::class.java)
             Timber.i("Opening Home Activity")
             startActivityForResult(intent,2)
+        }
+
 //        if(data?.javaClass == SignInActivity::class.java && resultCode == RESULT_OK){
 //            val intent = Intent(this, HomeActivity::class.java)
 //            Timber.i("Opening Home Activity")

@@ -1,27 +1,35 @@
 package wit.assignments.mobapp2_1.activities
 
-import android.app.Fragment
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import timber.log.Timber
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.ActivityHomeBinding
-import wit.assignments.mobapp2_1.main.MicaAppMain
-import wit.assignments.mobapp2_1.models.MarkJSONStore
+
 
 class HomeActivity : AppCompatActivity(){
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var activityHomeBinding : ActivityHomeBinding
 
-    private val userName : String = "Ash"
+    private lateinit var auth: FirebaseAuth
+    private lateinit var user : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser?.email.toString()
 
         activityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(activityHomeBinding.root)
@@ -36,6 +44,13 @@ class HomeActivity : AppCompatActivity(){
 
         val navView = activityHomeBinding.navView
         navView.setupWithNavController(navController)
+
+        val leaveButton =  navView.menu.findItem(R.id.leave)
+        leaveButton.setOnMenuItemClickListener {
+            setResult(10)
+            finish()
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -44,6 +59,14 @@ class HomeActivity : AppCompatActivity(){
     }
 
     fun getUserName() : String{
-        return userName
+        return user
     }
+//
+//    override  fun onOptionsItemSelected(menuItem : MenuItem) : Boolean{
+//        Timber.w( "ID Pressed: $menuItem.itemId")
+//        if(menuItem.itemId == R.id.leave) {
+//            finish()
+//        }
+//        return super.onOptionsItemSelected(menuItem)
+//    }
 }

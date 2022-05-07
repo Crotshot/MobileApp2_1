@@ -17,5 +17,9 @@
             android:id="@+id/postFragment"
             android:icon="@drawable/ic_baseline_add_circle_outline_24"
             android:title="@string/action_post" />
+        <item
+            android:id="@+id/leave"
+            android:icon="@drawable/ic_baseline_exit_to_app_24"
+            android:title="@string/action_leave" />
     </group>
 </menu>
