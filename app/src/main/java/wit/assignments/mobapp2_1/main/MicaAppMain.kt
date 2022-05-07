@@ -3,7 +3,7 @@ package wit.assignments.mobapp2_1.main
 import android.app.Application
 import timber.log.Timber
 import wit.assignments.mobapp2_1.models.MarkJSONStore
-import wit.assignments.mobapp2_1.models.MarkMemStore
+//import wit.assignments.mobapp2_1.models.MarkMemStore
 import wit.assignments.mobapp2_1.models.MarkStore
 import java.io.Serializable
 

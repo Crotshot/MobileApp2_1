@@ -2,12 +2,6 @@ package wit.assignments.mobapp2_1.models
 
 import timber.log.Timber
 
-var lastId = 0L
-
-internal fun getId(): Long {
-    return lastId++
-}
-
 class MarkMemStore : MarkStore{
     val marks = ArrayList<MarkModel>()
 

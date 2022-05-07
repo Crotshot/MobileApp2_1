@@ -21,6 +21,10 @@ val listType: Type = object : TypeToken<ArrayList<MarkModel>>() {}.type
 fun generateRandomId(): Long {
     return Random().nextLong()
 }
+var lastId = 0L
+internal fun getId(): Long {
+    return lastId++
+}
 
 class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
     var marks = ArrayList<MarkModel>()
