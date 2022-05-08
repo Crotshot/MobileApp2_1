@@ -13,6 +13,7 @@ import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.adapters.MarkAdapter
 import wit.assignments.mobapp2_1.databinding.FragmentMessagesBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
+import wit.assignments.mobapp2_1.models.MarkDBStore
 import wit.assignments.mobapp2_1.models.MarkJSONStore
 import wit.assignments.mobapp2_1.models.MarkStore
 
@@ -95,7 +96,7 @@ class MessagesFragment : Fragment() {
         transaction.setReorderingAllowed(true)
 
         val bundle = Bundle()
-        bundle.putSerializable("markStore", markStore as MarkJSONStore)
+        bundle.putSerializable("markStore", markStore as MarkDBStore)
         bundle.putLong("id", id)
 
         fragment.arguments = bundle

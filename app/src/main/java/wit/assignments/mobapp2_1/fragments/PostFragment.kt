@@ -106,7 +106,7 @@ class PostFragment : Fragment() {
             MarkModel(
                 messageText = markText,
                 userName = username,
-                messageImage = bitMap
+                //messageImage = bitMap
             )
         )
 

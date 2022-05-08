@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 
 interface MarkStore {
     fun start()
-    fun findAll() : List<MarkModel>
+   // fun findAll() : List<MarkModel>
     fun findById(id: Long) : MarkModel?
     fun create(mark: MarkModel)
     fun destroy(mark: MarkModel)

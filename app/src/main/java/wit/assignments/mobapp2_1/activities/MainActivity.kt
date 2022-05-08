@@ -10,14 +10,13 @@ import wit.assignments.mobapp2_1.main.MicaAppMain
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    lateinit var app: MicaAppMain
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.i("Main Activity Created")
 
         setContentView(R.layout.activity_main)
-        app = application as MicaAppMain
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

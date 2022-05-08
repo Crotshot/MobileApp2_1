@@ -11,6 +11,7 @@ import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.activities.HomeActivity
 import wit.assignments.mobapp2_1.databinding.FragmentMessageViewBinding
 import wit.assignments.mobapp2_1.main.MicaAppMain
+import wit.assignments.mobapp2_1.models.MarkDBStore
 import wit.assignments.mobapp2_1.models.MarkJSONStore
 import wit.assignments.mobapp2_1.models.MarkModel
 
@@ -34,15 +35,15 @@ class MessageViewFragment : Fragment() {
         val root = fragBinding.root
         activity?.title = getString(R.string.action_message)
 
-        val markStore: MarkJSONStore = arguments?.get("markStore") as MarkJSONStore
+        val markStore: MarkDBStore = arguments?.get("markStore") as MarkDBStore
         val markID : Long = arguments?.getLong("id") as Long
         val mark = markStore.findById(markID) as MarkModel
 
         fragBinding.userName.text = mark.userName
         fragBinding.goodRatingsText.text = mark.goodRatings.toString()
         fragBinding.poorRatingsText.text = mark.poorRatings.toString()
-        if(mark.messageImage != null)
-            fragBinding.messageImage.setImageBitmap(mark.messageImage)
+        //-->>::if(mark.messageImage != null)
+          //-->>::  fragBinding.messageImage.setImageBitmap(mark.messageImage)
         fragBinding.viewsText.text = mark.views.toString()
         fragBinding.markText.text = mark.messageText
         fragBinding.ratioBar.max = (mark.goodRatings + mark.poorRatings)

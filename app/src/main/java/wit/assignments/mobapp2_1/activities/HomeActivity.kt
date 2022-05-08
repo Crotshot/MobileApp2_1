@@ -15,18 +15,21 @@ import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.ActivityHomeBinding
+import wit.assignments.mobapp2_1.main.MicaAppMain
 
 
 class HomeActivity : AppCompatActivity(){
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var activityHomeBinding : ActivityHomeBinding
-
+    lateinit var app: MicaAppMain
     private lateinit var auth: FirebaseAuth
     private lateinit var user : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        app = application as MicaAppMain
+        app.markStore.start()
 
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser?.email.toString()

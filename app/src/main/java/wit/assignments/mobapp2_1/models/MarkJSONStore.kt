@@ -30,7 +30,7 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
     var marks = ArrayList<MarkModel>()
 
     override fun start(){
-//        deserialize()
+        deserialize()
 //        marks += MarkModel(-6516622895001943186, "Praise the Sun!", null, "Solaire",123,108,1)
 //        marks += MarkModel(-4566622857846986976, "If at first you do not succeed, try, try and TRY AGAIN!!!", null, "Patches",44,5,34)
 //        marks += MarkModel(-6516622857846943186, "Time for Crab", null, "Anonymous",149,130,1)
@@ -38,9 +38,9 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
 //        marks += MarkModel(-6666622857846867666, "Mmmmmmm, mmmmmmm, hmm?", null, "Siegmeyer",5,3,1)
     }
 
-    override fun findAll(): List<MarkModel> {
-        return marks
-    }
+//    override fun findAll(): List<MarkModel> {
+//        return marks
+//    }
 
     override fun findById(id:Long) : MarkModel? {
         val foundmark: MarkModel? = marks.find { it.id == id }
@@ -61,7 +61,7 @@ class MarkJSONStore(private val context: Context) : MarkStore, Serializable{
             foundMark.goodRatings = mark.goodRatings
             foundMark.views = mark.views
             foundMark.messageText = mark.messageText
-            foundMark.messageImage = mark.messageImage
+            //-->>::foundMark.messageImage = mark.messageImage
             foundMark.userName = mark.userName
             logAll()
             serialize()

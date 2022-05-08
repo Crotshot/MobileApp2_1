@@ -8,9 +8,9 @@ class MarkMemStore : MarkStore{
     override fun start() {
     }
 
-    override fun findAll(): List<MarkModel> {
-        return marks
-    }
+//    override fun findAll(): List<MarkModel> {
+//        return marks
+//    }
 
     override fun findById(id:Long) : MarkModel? {
         val foundmark: MarkModel? = marks.find { it.id == id }
@@ -36,7 +36,7 @@ class MarkMemStore : MarkStore{
             foundMark.goodRatings = mark.goodRatings
             foundMark.views = mark.views
             foundMark.messageText = mark.messageText
-            foundMark.messageImage = mark.messageImage
+            //-->>::foundMark.messageImage = mark.messageImage
             foundMark.userName = mark.userName
             logAll()
         }
