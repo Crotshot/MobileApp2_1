@@ -3,6 +3,7 @@ package wit.assignments.mobapp2_1.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import timber.log.Timber
 import wit.assignments.mobapp2_1.R
 import wit.assignments.mobapp2_1.databinding.ActivityMainBinding
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         val intent = Intent(this, SignInActivity::class.java)
         Timber.i("Opening Sign In Activity")
         startActivityForResult(intent,1)
