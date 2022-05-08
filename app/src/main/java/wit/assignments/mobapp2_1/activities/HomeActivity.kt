@@ -36,6 +36,13 @@ class HomeActivity : AppCompatActivity(){
 
         val navView = activityHomeBinding.navView
         navView.setupWithNavController(navController)
+
+        val leaveButton =  navView.menu.findItem(R.id.leave)
+        leaveButton.setOnMenuItemClickListener {
+            setResult(10)
+            finish()
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
